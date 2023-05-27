@@ -20,7 +20,7 @@ if(scheme){
   })
 } else {
   res.status(404).json({
-    message: "scheme not found"
+    message: `scheme with scheme_id ${scheme_id} not found`
   
   })
 }

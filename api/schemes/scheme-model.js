@@ -26,9 +26,31 @@ async function find() { // EXERCISE A
   */
 }
 
-function findById(scheme_id) { // EXERCISE B
+async function findById(scheme_id) { // EXERCISE B
   console.log("Model-FIND_ID")
- 
+ const rows = await db('schemes as sc')
+ .leftJoin('steps as st','sc.scheme_id','=','st.scheme_id')
+ .select('sc.scheme_name','st.*')
+ .where('sc.scheme_id',scheme_id)
+ .orderBy('st.step_number',' ASC')
+
+ const result = rows.reduce((acc, row)=>{
+  if(!acc.scheme_id){
+    acc.scheme_id = row.scheme_id
+    acc.scheme_name = row.scheme_name
+  }
+  if(row.step_id){
+    acc.steps.push({
+      step_id: row.step_id,
+      step_number: row.step_number,
+      instructions: row.instructions
+    })
+  }
+  return acc
+},{ scheme_id: null, scheme_name: null, steps: []})
+
+return result
+}
   /*
     1B- Study the SQL query below running it in SQLite Studio against `data/schemes.db3`:
 
@@ -94,7 +116,7 @@ function findById(scheme_id) { // EXERCISE B
         "steps": []
       }
   */
-}
+
 
 function findSteps(scheme_id) { // EXERCISE C
   console.log("Model-FIND_STEPS")
