@@ -7,7 +7,7 @@
   }
 */
 const checkSchemeId = (req, res, next) => {
-
+console.log('Middleware CHECK_SCHEME_ID')
 }
 
 /*
@@ -19,7 +19,7 @@ const checkSchemeId = (req, res, next) => {
   }
 */
 const validateScheme = (req, res, next) => {
-
+console.log('Middleware VALIDATE_SCHEME')
 }
 
 /*
