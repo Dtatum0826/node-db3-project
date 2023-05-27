@@ -20,7 +20,7 @@ if(scheme){
   })
 } else {
   res.status(404).json({
-    message: `scheme with scheme_id ${scheme_id} not found`
+    message:`scheme with scheme_id ${scheme_id} not found`
   
   })
 }
@@ -54,14 +54,15 @@ if(!scheme_name ||  typeof scheme_name !== 'string'|| scheme_name.trim() === '')
   }
 */
 const validateStep = (req, res, next) => {
-console.log('Middleware VALIDATE_STEP')
-const {step_number, instructions} = req.body
-if(!instructions || typeof instructions !== 'string' || instructions.trim()=== '' || step_number < 1){
-  return res.status(400).json({
-    message: 'invalid step'
-  })
-} next()
+  console.log('Middleware VALIDATE_STEP')
+  const { step_number, instructions } = req.body
+  if (!instructions || typeof instructions !== 'string' || instructions.trim() === '' || step_number < 1) {
+    return res.status(400).json({
+      message: 'invalid step'
+    })
+  }
 
+  next()
 }
 
 module.exports = {
